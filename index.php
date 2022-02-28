@@ -68,6 +68,7 @@ $faq = [
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
    <title>PHP-Google-FAQ</title>
 </head>
 
@@ -76,43 +77,49 @@ $faq = [
    <header></header>
    <!-- MAIN -->
    <main>
-      <?php foreach ($faq as $section) : ?>
-         <div class="section">
-            <h2><?= $section['title'] ?></h2>
-            <?php foreach ($section['content'] as $text) : ?>
-               <!-- SE è SEMPLICE TESTO -->
-               <?php if (!is_array($text)) : ?>
-                  <p><?= $text ?></p>
-                  <!-- SE è COMPOSTO DA UN ARRAY PER UNA LISTA -->
-               <?php elseif (is_array($text) && array_key_exists('l_title', $text[0])) : ?>
-                  <ol>
-                     <?php foreach ($text as $list) : ?>
-                        <li>
-                           <?= $list['l_title'] ?>
-                           <?php if (!empty($list['l_content'])) : ?>
-                              <ul>
-                                 <?php foreach ($list['l_content'] as $list_content) : ?>
-                                    <li>
-                                       <?= $list_content ?>
-                                    </li>
-                                 <?php endforeach; ?>
-                              </ul>
-                           <?php endif; ?>
-                        </li>
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-6 offset-3">
+               <?php foreach ($faq as $section) : ?>
+                  <div class="section">
+                     <h2><?= $section['title'] ?></h2>
+                     <?php foreach ($section['content'] as $text) : ?>
+                        <!-- SE è SEMPLICE TESTO -->
+                        <?php if (!is_array($text)) : ?>
+                           <p><?= $text ?></p>
+                           <!-- SE è COMPOSTO DA UN ARRAY PER UNA LISTA -->
+                        <?php elseif (is_array($text) && array_key_exists('l_title', $text[0])) : ?>
+                           <ol>
+                              <?php foreach ($text as $list) : ?>
+                                 <li>
+                                    <?= $list['l_title'] ?>
+                                    <?php if (!empty($list['l_content'])) : ?>
+                                       <ul>
+                                          <?php foreach ($list['l_content'] as $list_content) : ?>
+                                             <li>
+                                                <?= $list_content ?>
+                                             </li>
+                                          <?php endforeach; ?>
+                                       </ul>
+                                    <?php endif; ?>
+                                 </li>
+                              <?php endforeach; ?>
+                           </ol>
+                           <!-- SE è COMPOSTO DA UN ARRAY PER UN SOTTO CONTENUTO -->
+                        <?php elseif (is_array($text) && array_key_exists('sub_title', $text[0])) : ?>
+                           <?php foreach ($text as $sub_content) : ?>
+                              <h3><?= $sub_content['sub_title'] ?></h3>
+                              <?php foreach ($sub_content['sub_content'] as $content) : ?>
+                                 <p><?= $content ?></p>
+                              <?php endforeach; ?>
+                           <?php endforeach; ?>
+                        <?php endif; ?>
                      <?php endforeach; ?>
-                  </ol>
-                  <!-- SE è COMPOSTO DA UN ARRAY PER UN SOTTO CONTENUTO -->
-               <?php elseif (is_array($text) && array_key_exists('sub_title', $text[0])) : ?>
-                  <?php foreach ($text as $sub_content) : ?>
-                     <h3><?= $sub_content['sub_title'] ?></h3>
-                     <?php foreach ($sub_content['sub_content'] as $content) : ?>
-                        <p><?= $content ?></p>
-                     <?php endforeach; ?>
-                  <?php endforeach; ?>
-               <?php endif; ?>
-            <?php endforeach; ?>
+                  </div>
+               <?php endforeach; ?>
+            </div>
          </div>
-      <?php endforeach; ?>
+      </div>
    </main>
    <!-- FOOTER -->
    <footer></footer>
