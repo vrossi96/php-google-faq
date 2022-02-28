@@ -10,6 +10,23 @@ $faq = [
          'Quando cerchi un nome, potresti trovare una notifica in cui viene spiegato che i risultati potrebbero essere stati modificati nel rispetto delle leggi europee per la protezione dei dati. Mostriamo questa notifica agli utenti europei quando cercano la maggior parte dei nomi, non soltanto le pagine che sono state soggette a una rimozione.',
       ],
    ],
+   [
+      'title' => 'Perché il mio account è associato a un paese?',
+      'content' => [
+         'Il tuo account è associato a un paese (o territorio) nei Termini di servizio per poter stabilire due cose:',
+         [
+            [
+               'l_title' => 'La società consociata Google che offre i servizi, tratta le tue informazioni ed è responsabile del rispetto delle leggi sulla privacy vigenti. Generalmente Google offre i propri servizi per i consumatori tramite una delle due società seguenti:',
+               'l_content' => ['Google Ireland Limited, se gli utenti sono residenti nello Spazio economico europeo (paesi dell\'Unione europea, oltre a Islanda, Liechtenstein e Norvegia) o in Svizzera.', 'Google LLC, con sede negli Stati Uniti, per il resto del mondo.']
+            ],
+            [
+               'l_title' => 'La versione dei termini che regola il nostro rapporto, che può variare in base alle leggi locali.',
+               'l_content' => null,
+            ]
+         ],
+         'Tieni presente che i servizi Google sono fondamentalmente gli stessi a prescindere dalla società consociata che li offre o dal paese a cui è associato il tuo account.',
+      ],
+   ],
 
 ];
 ?>
@@ -21,7 +38,7 @@ $faq = [
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>PHP-Google-FAQ</title>
 </head>
 
 <body>
@@ -33,7 +50,17 @@ $faq = [
          <div class="section">
             <h2><?= $section['title'] ?></h2>
             <?php foreach ($section['content'] as $text) : ?>
-               <p><?= $text ?></p>
+               <?php if (!is_array($text)) : ?>
+                  <p><?= $text ?></p>
+               <?php elseif (is_array($text)) : ?>
+                  <ol>
+                     <?php foreach ($text as $list) : ?>
+                        <li>
+                           <?= $list['l_title'] ?>
+                        </li>
+                     <?php endforeach; ?>
+                  </ol>
+               <?php endif; ?>
             <?php endforeach; ?>
          </div>
       <?php endforeach; ?>
