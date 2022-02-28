@@ -57,6 +57,15 @@ $faq = [
                      <?php foreach ($text as $list) : ?>
                         <li>
                            <?= $list['l_title'] ?>
+                           <?php if (!empty($list['l_content'])) : ?>
+                              <ul>
+                                 <?php foreach ($list['l_content'] as $list_content) : ?>
+                                    <li>
+                                       <?= $list_content ?>
+                                    </li>
+                                 <?php endforeach; ?>
+                              </ul>
+                           <?php endif; ?>
                         </li>
                      <?php endforeach; ?>
                   </ol>
