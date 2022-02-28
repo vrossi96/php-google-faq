@@ -1,4 +1,28 @@
 <?php
+$header_menu = [
+   [
+      'link' => '#',
+      'name' => 'Introduzione',
+   ],
+   [
+      'link' => '#',
+      'name' => 'Norme sulla privacy',
+   ],
+   [
+      'link' => '#',
+      'name' => 'Termini di servizio',
+   ],
+   [
+      'link' => '#',
+      'name' => 'Tecnologie',
+   ],
+   [
+      'link' => '#',
+      'name' => 'Domande frequenti',
+   ],
+
+];
+
 $faq = [
    [
       'title' => 'Come state implementando la recente decisione della Corte di giustizia dell\'Unione europea (CGUE) relativa al diritto all\'oblio?',
@@ -68,13 +92,29 @@ $faq = [
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <link rel="stylesheet" href="./css/style.css">
    <title>PHP-Google-FAQ</title>
 </head>
 
 <body>
    <!-- HEADER -->
-   <header></header>
+   <header class="container-fluid d-flex flex-column justify-content-between">
+      <div class="top-nav">
+         <div>Privacy e termini</div>
+         <div><i role="button" class="fas fa-bars"></i></div>
+      </div>
+      <div class="bottom-nav">
+         <ul>
+            <?php foreach ($header_menu as $nav_itm) : ?>
+               <li>
+                  <a href="<?= $nav_itm['link'] ?>"><?= $nav_itm['name'] ?></a>
+               </li>
+            <?php endforeach; ?>
+         </ul>
+      </div>
+   </header>
    <!-- MAIN -->
    <main>
       <div class="container-fluid">
